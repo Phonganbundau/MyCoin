@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Grid, Card, CardContent, Typography, TextField, Button, Box, Container } from '@mui/material';
+import { Grid, Card, CardContent, Typography, Button, Box, Container } from '@mui/material';
 
 function TransactionPool() {
    
     const [transactionPool, setTransactionPool] = useState([]); // Transaction pool
-    const [receiverAddress, setReceiverAddress] = useState(''); // Địa chỉ người nhận
-    const [receiverAmount, setReceiverAmount] = useState(''); // Số tiền
     const [error, setError] = useState(null); // Lưu lỗi
 
     
@@ -20,6 +18,7 @@ function TransactionPool() {
             setTransactionPool(response.data);
         } catch (error) {
             console.error('Error fetching transaction pool:', error);
+            setError(error);
         }
     };
 
@@ -32,6 +31,7 @@ function TransactionPool() {
             getTransactionPool(); // Cập nhật lại transaction pool
         } catch (error) {
             console.error('Error minting block:', error);
+            setError(error);
         }
     };
 

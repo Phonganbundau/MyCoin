@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Grid, Card, CardContent, Typography, TextField, Button, Box, Container } from '@mui/material';
+import { Grid, Card, CardContent, Typography, Container } from '@mui/material';
 
 function AccountBalance() {
     const [address, setAddress] = useState(''); // Địa chỉ ví
     const [balance, setBalance] = useState(null); // Số dư
-    const [transactionPool, setTransactionPool] = useState([]); // Transaction pool
-    const [receiverAddress, setReceiverAddress] = useState(''); // Địa chỉ người nhận
-    const [receiverAmount, setReceiverAmount] = useState(''); // Số tiền
-    const [walletInfo, setWalletInfo] = useState({ privateKey: '', publicKey: '' });
     const [error, setError] = useState(null); // Lưu lỗi
 
 
@@ -22,6 +18,7 @@ function AccountBalance() {
             setAddress(response.data.address);
         } catch (error) {
             console.error('Error fetching address:', error);
+            setError(error);
         }
     };
 
@@ -32,6 +29,7 @@ function AccountBalance() {
             setBalance(response.data.balance);
         } catch (error) {
             console.error('Error fetching balance:', error);
+            setError(error);
         }
     };
 

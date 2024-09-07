@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { Grid, Card, CardContent, Typography, TextField, Button, Box, Container } from '@mui/material';
+import {Card, CardContent, Typography, Button, Box, Container } from '@mui/material';
 
 function CreateWallet() {
-    const [address, setAddress] = useState(''); // Địa chỉ ví
-    const [balance, setBalance] = useState(null); // Số dư
-    const [transactionPool, setTransactionPool] = useState([]); // Transaction pool
-    const [receiverAddress, setReceiverAddress] = useState(''); // Địa chỉ người nhận
-    const [receiverAmount, setReceiverAmount] = useState(''); // Số tiền
+   
+  
+
     const [walletInfo, setWalletInfo] = useState({ privateKey: '', publicKey: '' });
     const [error, setError] = useState(null); // Lưu lỗi
 
@@ -22,74 +20,13 @@ function CreateWallet() {
             });
         } catch (error) {
             console.error('Error creating wallet:', error);
+            setError(error);
         }
     };
     
     
 
-    // Hàm lấy địa chỉ ví
-    const getAddress = async () => {
-        try {
-            const response = await axios.get('http://localhost:3001/address');
-            setAddress(response.data.address);
-        } catch (error) {
-            console.error('Error fetching address:', error);
-        }
-    };
 
-    // Hàm lấy số dư
-    const getBalance = async () => {
-        try {
-            const response = await axios.get('http://localhost:3001/balance');
-            setBalance(response.data.balance);
-        } catch (error) {
-            console.error('Error fetching balance:', error);
-        }
-    };
-
-    // Hàm lấy danh sách transaction pool
-    const getTransactionPool = async () => {
-        try {
-            const response = await axios.get('http://localhost:3001/transactionPool');
-            setTransactionPool(response.data);
-        } catch (error) {
-            console.error('Error fetching transaction pool:', error);
-        }
-    };
-
-    // Hàm gửi transaction
-    const sendTransaction = async () => {
-        try {
-            await axios.post('http://localhost:3001/sendTransaction', {
-                address: receiverAddress,
-                amount: parseInt(receiverAmount)
-            });
-            setReceiverAddress('');
-            setReceiverAmount('');
-            getBalance(); // Cập nhật lại số dư
-            getTransactionPool(); // Cập nhật lại transaction pool
-        } catch (error) {
-            console.error('Error sending transaction:', error);
-            setError('Error sending transaction');
-        }
-    };
-
-    // Hàm tạo block mới
-    const mintBlock = async () => {
-        try {
-            await axios.post('http://localhost:3001/mintBlock');
-            getTransactionPool(); // Cập nhật lại transaction pool
-        } catch (error) {
-            console.error('Error minting block:', error);
-        }
-    };
-
-    // Chạy khi component được mount để lấy dữ liệu
-    useEffect(() => {
-        getAddress();
-        getBalance();
-        getTransactionPool();
-    }, []);
 
     return (
         <Container maxWidth="md" sx={{ marginTop: 4 }}>
