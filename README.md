@@ -1,4 +1,4 @@
-This is a personal project for the course "New Technologies in Software Development"
+This is a personal project for the course Modern Software Development Technologies - 20KTPM
 
 References: https://naivecoinstake.learn.uno/
 
