@@ -9,6 +9,7 @@ Run Back-end:
 ```
 cd backend
 npm install
+tsc
 npm start
 ```
 
