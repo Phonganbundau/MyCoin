@@ -2,7 +2,7 @@
 
 References: https://naivecoinstake.learn.uno/
 
-Based on this tutorial, I built some more functions, api path and UI using Reactjs.
+Based on this tutorial, I built some more functions, api path and self-build UI using Reactjs.
 
 Run Back-end:
 
